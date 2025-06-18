@@ -11,15 +11,19 @@
             android:id="@+id/textName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="4sp"
             android:layout_weight="1"
-            android:text="Healing" />
+            android:text="Healing"
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/textNominal"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="4sp"
             android:layout_weight="1"
             android:text="IDR 2.000.000"
-            android:textAlignment="textEnd" />
+            android:textAlignment="textEnd"
+            android:textStyle="bold" />
     </LinearLayout>
 </layout>

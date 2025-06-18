@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/navigation_main"
+    app:startDestination="@id/listBudgetFragment">
+
+    <fragment
+        android:id="@+id/listBudgetFragment"
+        android:name="com.ubaya.expensetracker.view.ListBudgetFragment"
+        android:label="fragment_list_budget"
+        tools:layout="@layout/fragment_list_budget" >
+        <action
+            android:id="@+id/actionEditBudget"
+            app:destination="@id/editBudgetFragment"
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@android:anim/fade_out" />
+        <action
+            android:id="@+id/actionNewBudget"
+            app:destination="@id/newBudgetFragment"
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@android:anim/fade_out" />
+    </fragment>
+    <fragment
+        android:id="@+id/editBudgetFragment"
+        android:name="com.ubaya.expensetracker.view.EditBudgetFragment"
+        android:label="fragment_edit_budget"
+        tools:layout="@layout/fragment_edit_budget" >
+        <argument
+            android:name="id"
+            app:argType="integer" />
+    </fragment>
+    <fragment
+        android:id="@+id/newBudgetFragment"
+        android:name="com.ubaya.expensetracker.view.NewBudgetFragment"
+        android:label="fragment_new_budget"
+        tools:layout="@layout/fragment_new_budget" />
+</navigation>

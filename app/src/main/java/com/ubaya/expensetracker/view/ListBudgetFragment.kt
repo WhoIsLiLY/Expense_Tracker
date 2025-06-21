@@ -1,5 +1,6 @@
 package com.ubaya.expensetracker.view
 
+import android.content.Context
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -11,7 +12,9 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.ubaya.expensetracker.databinding.FragmentListBudgetBinding
+import com.ubaya.expensetracker.model.BudgetDatabase
 import com.ubaya.expensetracker.viewmodel.ListBudgetViewModel
+import com.ubaya.expensetracker.viewmodel.ListBudgetViewModelFactory
 
 /**
  * A simple [Fragment] subclass.
@@ -35,8 +38,20 @@ class ListBudgetFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        viewModel = ViewModelProvider(this).get(ListBudgetViewModel::class.java)
-        viewModel.refresh()
+        val application = requireNotNull(this.activity).application
+        val budgetDao = BudgetDatabase.getDatabase(application).budgetDao()
+
+        val viewModelFactory = ListBudgetViewModelFactory(budgetDao)
+
+        viewModel = ViewModelProvider(this, viewModelFactory).get(ListBudgetViewModel::class.java)
+
+        val sharedPref = requireActivity().getSharedPreferences("ExpenseTrackerPrefs", Context.MODE_PRIVATE)
+        val loggedInUserId = sharedPref.getInt("LOGGED_IN_USER_ID", -1)
+
+        if (loggedInUserId != -1) {
+            viewModel.refresh(loggedInUserId)
+        }
+
         binding.recViewBudget.layoutManager = LinearLayoutManager(context)
         binding.recViewBudget.adapter = budgetListAdapter
 
@@ -74,12 +89,5 @@ class ListBudgetFragment : Fragment() {
                 binding.txtError?.visibility = View.VISIBLE
             }
         })
-
-        viewModel.needRefresh.observe(viewLifecycleOwner) {
-            if (it == true) {
-                viewModel.refresh()
-                viewModel.needRefresh.value = false
-            }
-        }
     }
 }

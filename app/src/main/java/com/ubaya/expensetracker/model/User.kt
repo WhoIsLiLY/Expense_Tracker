@@ -17,5 +17,5 @@ data class User(
     @ColumnInfo(name = "last_name")
     val lastName: String,
     @ColumnInfo(name = "password")
-    val password: String // Penting: Selalu simpan HASH dari password, bukan teks aslinya
+    var password: String // Penting: Selalu simpan HASH dari password, bukan teks aslinya
 )

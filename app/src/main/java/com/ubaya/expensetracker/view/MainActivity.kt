@@ -10,7 +10,7 @@ import com.ubaya.expensetracker.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
-//    private lateinit var navController: NavController
+    private lateinit var navController: NavController
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -18,11 +18,15 @@ class MainActivity : AppCompatActivity() {
         val view = binding.root
         setContentView(view)
 
-//        navController = (supportFragmentManager.findFragmentById(R.id.fragmentHost) as NavHostFragment).navController
-//        NavigationUI.setupActionBarWithNavController(this, navController)
+        setSupportActionBar(binding.toolbar)
+
+        navController = (supportFragmentManager.findFragmentById(R.id.fragmentHost) as NavHostFragment).navController
+        NavigationUI.setupWithNavController(binding.bottomNav, navController)
+
+        NavigationUI.setupActionBarWithNavController(this, navController)
     }
 
-//    override fun onSupportNavigateUp(): Boolean {
-//        return NavigationUI.navigateUp(navController,null)
-//    }
+    override fun onSupportNavigateUp(): Boolean {
+        return NavigationUI.navigateUp(navController,null)
+    }
 }

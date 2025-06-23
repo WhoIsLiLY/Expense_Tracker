@@ -35,4 +35,10 @@
         android:name="com.ubaya.expensetracker.view.NewBudgetFragment"
         android:label="fragment_new_budget"
         tools:layout="@layout/fragment_new_budget" />
+
+    <fragment
+        android:id="@+id/profileFragment"
+        android:name="com.ubaya.expensetracker.view.ProfileFragment"
+        android:label="Profile"
+        tools:layout="@layout/fragment_profile" />
 </navigation>

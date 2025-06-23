@@ -44,7 +44,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="bottom|right"
             android:layout_marginEnd="32dp"
-            android:layout_marginBottom="32dp"
+            android:layout_marginBottom="120dp"
             android:clickable="true"
             android:src="@drawable/baseline_add_24"
             app:layout_constraintBottom_toBottomOf="parent"

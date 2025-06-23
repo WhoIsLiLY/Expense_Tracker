@@ -12,7 +12,6 @@ import com.ubaya.expensetracker.databinding.FragmentRegisterBinding // Import Vi
 import com.ubaya.expensetracker.model.BudgetDatabase
 import com.ubaya.expensetracker.model.User
 import com.ubaya.expensetracker.viewmodel.AuthViewModel
-import com.ubaya.expensetracker.viewmodel.AuthViewModelFactory
 
 class RegisterFragment : Fragment() {
 
@@ -31,11 +30,7 @@ class RegisterFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        // Inisialisasi ViewModel menggunakan Factory
-        val application = requireNotNull(this.activity).application
-        val userDao = BudgetDatabase.getDatabase(application).userDao()
-        val viewModelFactory = AuthViewModelFactory(userDao)
-        viewModel = ViewModelProvider(this, viewModelFactory).get(AuthViewModel::class.java)
+        viewModel = ViewModelProvider(this).get(AuthViewModel::class.java)
 
         // Mengamati status registrasi dari ViewModel
         viewModel.registrationStatus.observe(viewLifecycleOwner) { isSuccess ->

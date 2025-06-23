@@ -1,21 +1,32 @@
 package com.ubaya.expensetracker.viewmodel
 
+import android.app.Application
+import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.ubaya.expensetracker.model.BudgetDatabase
 import com.ubaya.expensetracker.model.User
 import com.ubaya.expensetracker.model.UserDao
 import kotlinx.coroutines.launch
 import java.security.MessageDigest
 
-class AuthViewModel(private val userDao: UserDao) : ViewModel() {
+class AuthViewModel(application: Application) : AndroidViewModel(application) {
 
     private val _registrationStatus = MutableLiveData<Boolean>()
     val registrationStatus: LiveData<Boolean> = _registrationStatus
 
     private val _loginResult = MutableLiveData<User?>()
     val loginResult: LiveData<User?> = _loginResult
+
+    private val userDao: UserDao
+
+    init {
+        // Gunakan 'application' yang didapat dari konstruktor untuk membangun database
+        val db = BudgetDatabase.getDatabase(application)
+        userDao = db.userDao()
+    }
 
     fun registerUser(user: User) {
         viewModelScope.launch {

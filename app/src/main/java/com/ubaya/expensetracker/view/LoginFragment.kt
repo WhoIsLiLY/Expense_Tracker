@@ -14,7 +14,6 @@ import com.ubaya.expensetracker.databinding.FragmentLoginBinding // Import ViewB
 import com.ubaya.expensetracker.model.BudgetDatabase
 import com.ubaya.expensetracker.model.User
 import com.ubaya.expensetracker.viewmodel.AuthViewModel
-import com.ubaya.expensetracker.viewmodel.AuthViewModelFactory
 
 class LoginFragment : Fragment() {
     private lateinit var binding: FragmentLoginBinding
@@ -31,11 +30,7 @@ class LoginFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        // Inisialisasi ViewModel
-        val application = requireNotNull(this.activity).application
-        val userDao = BudgetDatabase.getDatabase(application).userDao()
-        val viewModelFactory = AuthViewModelFactory(userDao)
-        viewModel = ViewModelProvider(this, viewModelFactory).get(AuthViewModel::class.java)
+        viewModel = ViewModelProvider(this).get(AuthViewModel::class.java)
 
         // Mengamati hasil login dari ViewModel
         viewModel.loginResult.observe(viewLifecycleOwner) { user ->

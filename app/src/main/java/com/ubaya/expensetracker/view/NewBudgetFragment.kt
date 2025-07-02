@@ -16,13 +16,7 @@ import com.ubaya.expensetracker.databinding.FragmentNewBudgetBinding
 import com.ubaya.expensetracker.model.Budget
 import com.ubaya.expensetracker.model.BudgetDatabase
 import com.ubaya.expensetracker.viewmodel.DetailBudgetViewModel
-import com.ubaya.expensetracker.viewmodel.DetailBudgetViewModelFactory
 
-/**
- * A simple [Fragment] subclass.
- * Use the [NewBudget.newInstance] factory method to
- * create an instance of this fragment.
- */
 class NewBudgetFragment : Fragment() {
     private lateinit var binding: FragmentNewBudgetBinding
     private lateinit var viewModel: DetailBudgetViewModel
@@ -38,11 +32,7 @@ class NewBudgetFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val application = requireNotNull(this.activity).application
-        val budgetDao = BudgetDatabase.getDatabase(application).budgetDao()
-        val viewModelFactory = DetailBudgetViewModelFactory(budgetDao)
-        viewModel = ViewModelProvider(this, viewModelFactory).get(DetailBudgetViewModel::class.java)
-
+        viewModel = ViewModelProvider(this).get(DetailBudgetViewModel::class.java)
         binding.btnAdd.setOnClickListener {
             val name = binding.txtName.text.toString()
             val nominal = binding.txtNominal.text.toString().toIntOrNull()

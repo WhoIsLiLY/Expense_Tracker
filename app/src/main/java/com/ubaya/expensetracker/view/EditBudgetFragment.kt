@@ -13,13 +13,7 @@ import androidx.navigation.Navigation
 import com.ubaya.expensetracker.databinding.FragmentEditBudgetBinding
 import com.ubaya.expensetracker.model.BudgetDatabase
 import com.ubaya.expensetracker.viewmodel.DetailBudgetViewModel
-import com.ubaya.expensetracker.viewmodel.DetailBudgetViewModelFactory
 
-/**
- * A simple [Fragment] subclass.
- * Use the [EditBudgetFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class EditBudgetFragment : Fragment() {
     private lateinit var binding: FragmentEditBudgetBinding
     private lateinit var viewModel: DetailBudgetViewModel
@@ -35,11 +29,7 @@ class EditBudgetFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val application = requireNotNull(this.activity).application
-        val budgetDao = BudgetDatabase.getDatabase(application).budgetDao()
-        val viewModelFactory = DetailBudgetViewModelFactory(budgetDao)
         viewModel = ViewModelProvider(this).get(DetailBudgetViewModel::class.java)
-
 //        val id = EditBudgetFragmentArgs.fromBundle(requireArguments()).id
         arguments?.let {
             budgetId = EditBudgetFragmentArgs.fromBundle(it).id

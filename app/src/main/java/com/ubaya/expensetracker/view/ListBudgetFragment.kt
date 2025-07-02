@@ -14,13 +14,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.ubaya.expensetracker.databinding.FragmentListBudgetBinding
 import com.ubaya.expensetracker.model.BudgetDatabase
 import com.ubaya.expensetracker.viewmodel.ListBudgetViewModel
-import com.ubaya.expensetracker.viewmodel.ListBudgetViewModelFactory
 
-/**
- * A simple [Fragment] subclass.
- * Use the [ListBudgetFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class ListBudgetFragment : Fragment() {
     private lateinit var binding: FragmentListBudgetBinding
     private lateinit var viewModel: ListBudgetViewModel
@@ -38,13 +32,7 @@ class ListBudgetFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val application = requireNotNull(this.activity).application
-        val budgetDao = BudgetDatabase.getDatabase(application).budgetDao()
-
-        val viewModelFactory = ListBudgetViewModelFactory(budgetDao)
-
-        viewModel = ViewModelProvider(this, viewModelFactory).get(ListBudgetViewModel::class.java)
-
+        viewModel = ViewModelProvider(this).get(ListBudgetViewModel::class.java)
         val sharedPref = requireActivity().getSharedPreferences("ExpenseTrackerPrefs", Context.MODE_PRIVATE)
         val loggedInUserId = sharedPref.getInt("LOGGED_IN_USER_ID", -1)
 

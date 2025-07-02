@@ -15,17 +15,24 @@ import kotlinx.coroutines.launch
 import java.util.UUID
 import kotlin.coroutines.CoroutineContext
 
-class ListBudgetViewModel(private val budgetDao: BudgetDao) : ViewModel(), CoroutineScope {
+class ListBudgetViewModel(application: Application) :
+    AndroidViewModel(application),
+    CoroutineScope {
 
     val budgetLD = MutableLiveData<List<Budget>>()
     val budgetLoadErrorLD = MutableLiveData<Boolean>()
     val budgetloadingLD = MutableLiveData<Boolean>()
-    private var job = Job()
 
-    val needRefresh = MutableLiveData<Boolean>()
+    private val budgetDao: BudgetDao
 
+    private val job = Job()
     override val coroutineContext: CoroutineContext
         get() = job + Dispatchers.IO
+
+    init {
+        val db = BudgetDatabase.getDatabase(application)
+        budgetDao = db.budgetDao()
+    }
 
     //Refresh or populate data to budgetLD from database
     fun refresh(userId: Int) {

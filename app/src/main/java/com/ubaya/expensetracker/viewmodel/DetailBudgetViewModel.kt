@@ -35,7 +35,9 @@ class DetailBudgetViewModel(application: Application) :
 
     fun addBudget(budget: Budget) {
         launch {
-            budgetDao.insertBudget(budget)
+            withContext(Dispatchers.IO) {
+                budgetDao.insertBudget(budget)
+            }
         }
     }
 

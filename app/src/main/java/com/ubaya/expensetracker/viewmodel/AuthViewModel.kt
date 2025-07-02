@@ -14,6 +14,7 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import java.security.MessageDigest
 import kotlin.coroutines.CoroutineContext
 
@@ -41,7 +42,9 @@ class AuthViewModel(application: Application) :
     fun registerUser(user: User) {
         launch {
             try {
-                userDao.insertUser(user)
+                withContext(Dispatchers.IO) {
+                    userDao.insertUser(user)
+                }
                 _registrationStatus.postValue(true)
             } catch (e: Exception) {
                 Log.e("AuthViewModel", "Registration database error", e)

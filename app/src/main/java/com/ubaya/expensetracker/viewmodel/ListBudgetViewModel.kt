@@ -12,6 +12,7 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import java.util.UUID
 import kotlin.coroutines.CoroutineContext
 
@@ -41,7 +42,9 @@ class ListBudgetViewModel(application: Application) :
         launch {
 //            val db = buildDb(getApplication())
             try {
-                val budgets = budgetDao.getAllBudgetsForUser(userId)
+                val budgets = withContext(Dispatchers.IO) {
+                    budgetDao.getAllBudgetsForUser(userId)
+                }
                 budgetLD.postValue(budgets)
             } catch (e: Exception) {
                 budgetLoadErrorLD.postValue(true)
@@ -51,11 +54,12 @@ class ListBudgetViewModel(application: Application) :
         }
     }
 
-    //Delete budget (Seharusnya tidak perlu)
     fun deleteBudget(budget: Budget, userId: Int) {
         launch {
             try {
-                budgetDao.deleteBudget(budget)
+                withContext(Dispatchers.IO) {
+                    budgetDao.deleteBudget(budget)
+                }
                 refresh(userId)
             } catch (e: Exception) {
                 // Handle error

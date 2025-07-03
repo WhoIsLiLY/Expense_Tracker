@@ -18,6 +18,8 @@ class EditBudgetFragment : Fragment() {
     private lateinit var viewModel: DetailBudgetViewModel
     private var budgetId = 0
 
+    private var currentTotalExpense: Int = 0
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -40,6 +42,7 @@ class EditBudgetFragment : Fragment() {
         if (loggedInUserId != -1 && budgetId != 0) {
             // 2. Panggil fungsi fetch yang benar dengan menyertakan userId
             viewModel.fetchBudgetById(budgetId, loggedInUserId)
+            viewModel.getTotalExpenseForBudget(budgetId)
         }
 //        viewModel.fetchBudget(id)
 
@@ -51,12 +54,16 @@ class EditBudgetFragment : Fragment() {
 
             if (name.isNotEmpty() && nominal != null && nominal > 0 && loggedInUserId != -1) {
                 // 3. Panggil fungsi update yang benar dengan menyertakan userId
-                viewModel.updateBudget(budgetId, loggedInUserId, name, nominal)
-                Toast.makeText(view.context, "Budget updated", Toast.LENGTH_SHORT).show()
-                Navigation.findNavController(it).popBackStack()
+                if (nominal<currentTotalExpense) {
+                    Toast.makeText(view.context, "Budget minimum is "+currentTotalExpense.toString(), Toast.LENGTH_SHORT)
+                        .show()
+                } else {
+                    viewModel.updateBudget(budgetId, loggedInUserId, name, nominal)
+                    Toast.makeText(view.context, "Budget updated", Toast.LENGTH_SHORT).show()
+                    Navigation.findNavController(it).popBackStack()
+                }
             } else {
-                Toast.makeText(view.context, "Please fill all fields correctly", Toast.LENGTH_SHORT)
-                    .show()
+                Toast.makeText(view.context, "Please fill all fields correctly", Toast.LENGTH_SHORT).show()
             }
         }
 
@@ -74,5 +81,9 @@ class EditBudgetFragment : Fragment() {
                 Toast.makeText(context, "Budget not found or error loading data.", Toast.LENGTH_SHORT).show()
             }
         })
+
+        viewModel.totalExpense.observe(viewLifecycleOwner) { total ->
+            currentTotalExpense = total ?: 0
+        }
     }
 }

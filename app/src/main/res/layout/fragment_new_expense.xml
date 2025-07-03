@@ -92,10 +92,12 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:hint="Nominal"
+        app:endIconMode="none"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/textBudgetUsed"
-        app:prefixText="$">
+        app:startIconDrawable="@drawable/baseline_attach_money_24"
+        app:startIconScaleType="centerInside">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/editNominal"

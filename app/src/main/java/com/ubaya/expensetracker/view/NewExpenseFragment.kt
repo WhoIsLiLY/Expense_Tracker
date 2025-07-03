@@ -47,12 +47,7 @@ class NewExpenseFragment : Fragment() {
         }
 
         setupCurrentDate()
-        observeViewModel() // Panggil fungsi untuk mendaftarkan semua observer
-
-        // Tidak perlu lagi memanggil updateBudgetInfo dari sini, karena observer yang akan menanganinya
-        // binding.editNominal.setOnFocusChangeListener { _, hasFocus ->
-        //     updateBudgetInfo()
-        // }
+        observeViewModel()
 
         binding.buttonAddExpense.setOnClickListener {
             handleAddExpense()
@@ -66,42 +61,28 @@ class NewExpenseFragment : Fragment() {
     }
 
     private fun observeViewModel() {
-        // Observer untuk daftar budget
         viewModel.budgetListLD.observe(viewLifecycleOwner) { budgets ->
             this.budgetList = budgets
             val budgetNames = budgets.map { it.name }
             val adapter = ArrayAdapter(requireContext(), android.R.layout.simple_dropdown_item_1line, budgetNames)
             binding.autoCompleteBudget.setAdapter(adapter)
-
-            // Setup listener saat item di combobox dipilih
             binding.autoCompleteBudget.setOnItemClickListener { _, _, position, _ ->
                 selectedBudget = budgets[position]
-                // PERBAIKAN KUNCI 1:
-                // Beri tahu ViewModel untuk mengambil total expense untuk budget yang BARU dipilih.
-                // Anda mungkin perlu membuat fungsi ini di ViewModel Anda.
                 selectedBudget?.let {
                     viewModel.getTotalExpenseForBudget(it.id)
                 }
             }
         }
 
-        // PERBAIKAN KUNCI 2:
-        // Observer untuk total expense. Didaftarkan SATU KALI di sini.
         viewModel.totalExpense.observe(viewLifecycleOwner) { total ->
-            // Simpan nilai total expense terbaru
-            currentTotalExpense = total ?: 0 // Gunakan elvis operator untuk keamanan jika total null
-            // Panggil fungsi untuk memperbarui UI setiap kali ada data baru
+            currentTotalExpense = total ?: 0
             updateBudgetInfo()
         }
 
-        // Panggil sekali untuk menginisialisasi UI ke keadaan default
         updateBudgetInfo()
     }
 
     private fun updateBudgetInfo() {
-        // PERBAIKAN KUNCI 3:
-        // Fungsi ini sekarang menjadi SINKRON. Tugasnya hanya menampilkan data
-        // dari `selectedBudget` dan `currentTotalExpense`.
         selectedBudget?.let { budget ->
             val budgetLeft = budget.nominal - currentTotalExpense
 
@@ -115,7 +96,6 @@ class NewExpenseFragment : Fragment() {
                 0
             }
         } ?: run {
-            // Jika tidak ada budget yang dipilih, reset UI
             binding.textBudgetUsed.text = "IDR 0"
             binding.textBudgetMax.text = "IDR 0"
             binding.textBudgetLeft.text = ""
@@ -141,7 +121,6 @@ class NewExpenseFragment : Fragment() {
         }
 
         val nominal = nominalString.toInt()
-        // PERBAIKAN KUNCI 4: Gunakan `currentTotalExpense` yang sudah kita simpan
         val budgetLeft = selectedBudget!!.nominal - currentTotalExpense
         if (nominal <= 0) {
             binding.textFieldNominal.error = "Nominal must be positive"

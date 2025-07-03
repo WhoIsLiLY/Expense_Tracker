@@ -15,6 +15,8 @@ import com.ubaya.expensetracker.databinding.FragmentExpenseTrackerBinding
 import com.ubaya.expensetracker.databinding.FragmentReportBinding
 import com.ubaya.expensetracker.viewmodel.DetailExpenseViewModel
 import com.ubaya.expensetracker.viewmodel.ExpenseViewModel
+import java.text.NumberFormat
+import java.util.Locale
 
 class ReportFragment : Fragment() {
     private lateinit var binding: FragmentReportBinding
@@ -56,6 +58,14 @@ class ReportFragment : Fragment() {
                 binding.txtError2.text = "No records"
             } else {
                 binding.recyclerViewReport?.visibility = View.VISIBLE
+                val totalExpenses = it.sumOf { it.totalExpense ?: 0 }
+                val totalBudget = it.sumOf { it.budgetNominal }
+
+                val nf = NumberFormat.getNumberInstance(Locale("in", "ID"))
+                val formattedExpenses = nf.format(totalExpenses)
+                val formattedBudget = nf.format(totalBudget)
+
+                binding.textTotalReport.text = "IDR $formattedExpenses / IDR $formattedBudget"
             }
         })
 

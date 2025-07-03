@@ -52,11 +52,11 @@ class NewBudgetFragment : Fragment() {
 
             if (isValid && nominal != null) {
                 val sharedPref = requireActivity().getSharedPreferences("ExpenseTrackerPrefs", Context.MODE_PRIVATE)
-                val loggedInUserId = sharedPref.getInt("LOGGED_IN_USER_ID", -1) // -1 adalah nilai default jika tidak ditemukan
+                val loggedInUserId = sharedPref.getInt("LOGGED_IN_USER_ID", -1)
 
                 if (loggedInUserId == -1) {
                     Toast.makeText(context, "Error: User session not found. Please re-login.", Toast.LENGTH_LONG).show()
-                    return@setOnClickListener // Keluar dari fungsi jika tidak ada user yang login
+                    return@setOnClickListener
                 }
 
                 val budget = Budget(userId = loggedInUserId, name = name, nominal = nominal)

@@ -41,4 +41,25 @@
         android:name="com.ubaya.expensetracker.view.ProfileFragment"
         android:label="Profile"
         tools:layout="@layout/fragment_profile" />
+    <fragment
+        android:id="@+id/newExpenseFragment"
+        android:name="com.ubaya.expensetracker.view.NewExpenseFragment"
+        android:label="fragment_new_expense"
+        tools:layout="@layout/fragment_new_expense" />
+    <fragment
+        android:id="@+id/expenseTrackerFragment"
+        android:name="com.ubaya.expensetracker.view.ExpenseTrackerFragment"
+        android:label="fragment_expense_tracker"
+        tools:layout="@layout/fragment_expense_tracker" >
+        <action
+            android:id="@+id/actionNewExpense"
+            app:destination="@id/newExpenseFragment"
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@android:anim/fade_out" />
+    </fragment>
+    <fragment
+        android:id="@+id/reportFragment2"
+        android:name="com.ubaya.expensetracker.view.ReportFragment"
+        android:label="fragment_report"
+        tools:layout="@layout/fragment_report" />
 </navigation>

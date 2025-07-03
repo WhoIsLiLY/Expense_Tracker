@@ -12,10 +12,11 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import java.security.MessageDigest
 
-@Database(entities = [Budget::class, User::class], version =  1)
+@Database(entities = [Budget::class, User::class, Expense::class], version =  2)
 abstract class ExpenseTrackerDatabase: RoomDatabase() {
     abstract fun budgetDao(): BudgetDao
     abstract fun userDao(): UserDao
+    abstract fun expenseDao(): ExpenseDao
 
     companion object {
         private const val DB_NAME = "expensetracker.db"

@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="24dp">
+
+    <TextView
+        android:id="@+id/textDetailDate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?attr/textAppearanceCaption"
+        tools:text="19 Mei 2025 09.45 AM" />
+
+    <TextView
+        android:id="@+id/textDetailNotes"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:textAppearance="?attr/textAppearanceBody1"
+        android:textColor="?android:attr/textColorPrimary"
+        tools:text="Pesan gojek dari West ke East" />
+
+    <com.google.android.material.chip.Chip
+        android:id="@+id/chipDetailBudget"
+        style="@style/Widget.MaterialComponents.Chip.Action"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:clickable="false"
+        tools:text="Transport" />
+
+    <TextView
+        android:id="@+id/textDetailNominal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="start"
+        android:layout_marginTop="12dp"
+        android:textAppearance="?attr/textAppearanceHeadline5"
+        android:textStyle="bold"
+        tools:text="IDR 88.000" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/buttonCloseDialog"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end"
+        android:layout_marginTop="24dp"
+        android:text="Close" />
+
+</LinearLayout>

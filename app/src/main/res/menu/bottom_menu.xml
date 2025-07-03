@@ -3,17 +3,17 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
-        android:id="@+id/listBudgetFragment"
+        android:id="@+id/expenseTrackerFragment"
         android:icon="@drawable/baseline_add_card_24"
-        android:title="Budget" />
-
-    <item
-        android:id="@+id/expensesFragment"
-        android:icon="@drawable/baseline_pie_chart_24"
         android:title="Expenses" />
 
     <item
-        android:id="@+id/reportFragment"
+        android:id="@+id/listBudgetFragment"
+        android:icon="@drawable/baseline_pie_chart_24"
+        android:title="Budgets" />
+
+    <item
+        android:id="@+id/reportFragment2"
         android:icon="@drawable/baseline_bar_chart_24"
         android:title="Report" />
 

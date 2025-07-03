@@ -10,17 +10,16 @@ import androidx.sqlite.db.SupportSQLiteDatabase
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.runBlocking
 import java.security.MessageDigest
 
 @Database(entities = [Budget::class, User::class], version =  1)
-abstract class BudgetDatabase: RoomDatabase() {
+abstract class ExpenseTrackerDatabase: RoomDatabase() {
     abstract fun budgetDao(): BudgetDao
     abstract fun userDao(): UserDao
 
     companion object {
         private const val DB_NAME = "expensetracker.db"
-        @Volatile private var instance: BudgetDatabase ?= null
+        @Volatile private var instance: ExpenseTrackerDatabase ?= null
         private val LOCK = Any()
 
         private val roomCallback = object : RoomDatabase.Callback() {
@@ -56,7 +55,7 @@ abstract class BudgetDatabase: RoomDatabase() {
                 .fold("") { str, it -> str + "%02x".format(it) }
         }
 
-        fun getDatabase(context: Context): BudgetDatabase {
+        fun getDatabase(context: Context): ExpenseTrackerDatabase {
             return instance ?: synchronized(LOCK) {
                 instance ?: buildDatabase(context).also {
                     instance = it
@@ -67,7 +66,7 @@ abstract class BudgetDatabase: RoomDatabase() {
         fun buildDatabase(context: Context) =
             Room.databaseBuilder(
                 context.applicationContext,
-                BudgetDatabase::class.java, DB_NAME)
+                ExpenseTrackerDatabase::class.java, DB_NAME)
                 .fallbackToDestructiveMigration()
                 .allowMainThreadQueries()
                 .addCallback(roomCallback)

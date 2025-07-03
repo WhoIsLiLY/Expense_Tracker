@@ -3,12 +3,9 @@ package com.ubaya.expensetracker.viewmodel
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
-import buildDb
 import com.ubaya.expensetracker.model.Budget
 import com.ubaya.expensetracker.model.BudgetDao
-import com.ubaya.expensetracker.model.BudgetDatabase
+import com.ubaya.expensetracker.model.ExpenseTrackerDatabase
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
@@ -29,7 +26,7 @@ class DetailBudgetViewModel(application: Application) :
         get() = job + Dispatchers.IO
 
     init {
-        val db = BudgetDatabase.getDatabase(application)
+        val db = ExpenseTrackerDatabase.getDatabase(application)
         budgetDao = db.budgetDao()
     }
 

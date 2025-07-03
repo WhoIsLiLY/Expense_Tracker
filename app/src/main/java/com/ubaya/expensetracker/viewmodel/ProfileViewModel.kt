@@ -5,7 +5,7 @@ import androidx.lifecycle.AndroidViewModel // Import AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
-import com.ubaya.expensetracker.model.BudgetDatabase
+import com.ubaya.expensetracker.model.ExpenseTrackerDatabase
 import com.ubaya.expensetracker.model.UserDao
 import kotlinx.coroutines.launch
 import java.security.MessageDigest
@@ -18,7 +18,7 @@ class ProfileViewModel(application: Application) : AndroidViewModel(application)
     private val userDao: UserDao
 
     init {
-        val db = BudgetDatabase.getDatabase(application)
+        val db = ExpenseTrackerDatabase.getDatabase(application)
         userDao = db.userDao()
     }
 

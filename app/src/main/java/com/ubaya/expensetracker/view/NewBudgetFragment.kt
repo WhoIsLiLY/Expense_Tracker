@@ -6,15 +6,11 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.RadioButton
 import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.viewmodel.viewModelFactory
 import androidx.navigation.Navigation
-import com.ubaya.expensetracker.R
 import com.ubaya.expensetracker.databinding.FragmentNewBudgetBinding
 import com.ubaya.expensetracker.model.Budget
-import com.ubaya.expensetracker.model.BudgetDatabase
 import com.ubaya.expensetracker.viewmodel.DetailBudgetViewModel
 
 class NewBudgetFragment : Fragment() {

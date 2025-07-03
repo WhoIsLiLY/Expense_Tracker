@@ -5,9 +5,7 @@ import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
-import com.ubaya.expensetracker.model.BudgetDatabase
+import com.ubaya.expensetracker.model.ExpenseTrackerDatabase
 import com.ubaya.expensetracker.model.User
 import com.ubaya.expensetracker.model.UserDao
 import kotlinx.coroutines.CoroutineScope
@@ -35,7 +33,7 @@ class AuthViewModel(application: Application) :
         get() = job + Dispatchers.IO
 
     init {
-        val db = BudgetDatabase.getDatabase(application)
+        val db = ExpenseTrackerDatabase.getDatabase(application)
         userDao = db.userDao()
     }
 

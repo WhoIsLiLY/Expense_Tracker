@@ -1,13 +1,11 @@
 import android.content.Context
 import androidx.room.Room
-import androidx.room.migration.Migration
-import androidx.sqlite.db.SupportSQLiteDatabase
-import com.ubaya.expensetracker.model.BudgetDatabase
+import com.ubaya.expensetracker.model.ExpenseTrackerDatabase
 
 val DB_NAME = "newbudgetdb"
 
-fun buildDb(context: Context): BudgetDatabase {
+fun buildDb(context: Context): ExpenseTrackerDatabase {
     val db = Room.databaseBuilder(context,
-        BudgetDatabase::class.java, DB_NAME).build()
+        ExpenseTrackerDatabase::class.java, DB_NAME).build()
     return db
 }

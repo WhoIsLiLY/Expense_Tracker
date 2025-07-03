@@ -6,13 +6,11 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.ubaya.expensetracker.databinding.FragmentListBudgetBinding
-import com.ubaya.expensetracker.model.BudgetDatabase
 import com.ubaya.expensetracker.viewmodel.ListBudgetViewModel
 
 class ListBudgetFragment : Fragment() {
@@ -56,7 +54,7 @@ class ListBudgetFragment : Fragment() {
             budgetListAdapter.updateBudgetList(it)
             if(it.isEmpty()) {
                 binding.recViewBudget?.visibility = View.GONE
-                binding.txtError.setText("Your todo still empty.")
+                binding.txtError.setText("Your budget still empty.")
             } else {
                 binding.recViewBudget?.visibility = View.VISIBLE
             }

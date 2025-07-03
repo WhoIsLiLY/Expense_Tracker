@@ -9,7 +9,6 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.ubaya.expensetracker.databinding.FragmentRegisterBinding // Import ViewBinding
-import com.ubaya.expensetracker.model.BudgetDatabase
 import com.ubaya.expensetracker.model.User
 import com.ubaya.expensetracker.viewmodel.AuthViewModel
 

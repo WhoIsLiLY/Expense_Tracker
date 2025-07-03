@@ -11,7 +11,6 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
 import com.ubaya.expensetracker.databinding.FragmentEditBudgetBinding
-import com.ubaya.expensetracker.model.BudgetDatabase
 import com.ubaya.expensetracker.viewmodel.DetailBudgetViewModel
 
 class EditBudgetFragment : Fragment() {

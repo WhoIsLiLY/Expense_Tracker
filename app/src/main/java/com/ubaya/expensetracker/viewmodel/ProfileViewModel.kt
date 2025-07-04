@@ -15,6 +15,12 @@ class ProfileViewModel(application: Application) : AndroidViewModel(application)
     private val _passwordChangeStatus = MutableLiveData<Boolean>()
     val passwordChangeStatus: LiveData<Boolean> = _passwordChangeStatus
 
+    private val _changePasswordEvent = MutableLiveData<Boolean?>()
+    val changePasswordEvent: LiveData<Boolean?> = _changePasswordEvent
+
+    private val _signOutEvent = MutableLiveData<Boolean?>()
+    val signOutEvent: LiveData<Boolean?> = _signOutEvent
+
     private val userDao: UserDao
 
     init {
@@ -33,6 +39,19 @@ class ProfileViewModel(application: Application) : AndroidViewModel(application)
                 _passwordChangeStatus.postValue(false)
             }
         }
+    }
+
+    fun onChangePasswordClick() {
+        _changePasswordEvent.value = true
+    }
+
+    fun onSignOutClick() {
+        _signOutEvent.value = true
+    }
+
+    fun doneNavigating() {
+        _changePasswordEvent.value = null
+        _signOutEvent.value = null
     }
 
     fun hashString(input: String): String {

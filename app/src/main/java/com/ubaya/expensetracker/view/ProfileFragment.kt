@@ -48,8 +48,11 @@ class ProfileFragment : Fragment() {
             }
         }
 
-        binding.buttonChangePassword.setOnClickListener {
-            handleChangePassword()
+        viewModel.changePasswordEvent.observe(viewLifecycleOwner) { shouldChange ->
+            if (shouldChange == true) {
+                handleChangePassword()
+                viewModel.doneNavigating() // Reset event
+            }
         }
 
         binding.buttonSignOut.setOnClickListener {

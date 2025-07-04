@@ -101,7 +101,8 @@
             android:text="CHANGE PASSWORD"
             app:cornerRadius="20dp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/buttonSignOut" />
+            app:layout_constraintTop_toTopOf="@+id/buttonSignOut"
+            android:onClick="@{() -> viewmodel.onChangePasswordClick()}"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
